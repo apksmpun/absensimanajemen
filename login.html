@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+  <div class="bg-white p-6 rounded-2xl shadow-lg w-96">
+    <!-- Logo + Judul -->
+    <div class="flex flex-col items-center mb-6">
+      <img src="logoYMS.png" alt="Logo YMS" class="w-20 h-20 mb-3">
+      <h1 class="text-2xl font-bold text-gray-700">Manajemen Absensi YMS</h1>
+    </div>
+
+    <!-- Form Login -->
+    <form id="loginForm" class="flex flex-col space-y-4">
+      <input type="text" id="username" placeholder="Username" 
+        class="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
+      <div class="relative">
+        <input type="password" id="password" placeholder="Password" 
+          class="border px-4 py-2 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <button type="button" onclick="togglePassword()" 
+          class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+      </div>
+
+      <button id="loginBtn" type="submit" 
+        class="bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 flex items-center justify-center">
+        <span id="btnText">Login</span>
+        <svg id="btnLoading" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+      </button>
+    </form>
+
+    <p id="errorMsg" class="text-red-500 text-sm mt-3 text-center"></p>
+  </div>
+
+  <!-- FontAwesome untuk icon mata -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwHiSfuikYC6V1ZKvkG_XFANU3rOF9jaSpGAa8NvyBqczqv8ogYzxbwcWqP-dk1dzrqkg/exec"; 
+
+    function togglePassword() {
+      const passInput = document.getElementById("password");
+      passInput.type = passInput.type === "password" ? "text" : "password";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const btnText = document.getElementById("btnText");
+      const btnLoading = document.getElementById("btnLoading");
+
+      if(!username || !password){
+        Swal.fire("Error","Username dan password wajib diisi","error");
+        return;
+      }
+
+      // tombol loading
+      btnText.classList.add("hidden");
+      btnLoading.classList.remove("hidden");
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          body: new URLSearchParams({username, password})
+        });
+        const data = await res.json();
+
+        if(data.success){
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("role", data.role);
+          window.location.href = "index.html";
+        } else {
+          Swal.fire("Gagal", data.message, "error");
+        }
+      } catch (err) {
+        Swal.fire("Error","Gagal login. Periksa koneksi atau server.","error");
+      }
+
+      // reset tombol
+      btnText.classList.remove("hidden");
+      btnLoading.classList.add("hidden");
+    });
+  </script>
+</body>
+</html>

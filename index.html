@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Absensi YMS</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <a href="index.html" style="color: rgb(252, 250, 250); text-decoration: none;">
+        <h2>Manajemen Absensi</h2>
+      </a>
+
+      <!-- Tombol Ganti Password -->
+      <button onclick="loadPage('gantiPassword.html')" 
+        style="margin:10px 0; padding:6px 12px; background:#2980b9; color:white; border:none; border-radius:6px; cursor:pointer;">
+        <i class="fas fa-key"></i> Pengaturan Akun
+      </button>
+
+      <!-- Tombol Logout -->
+      <button onclick="logout()" 
+        style="margin:10px 0; padding:6px 12px; background:#c0392b; color:white; border:none; border-radius:6px; cursor:pointer;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+
+      <!-- Menu YAYASAN -->
+      <ul id="menu-yayasan" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoYMS.png" alt="Logo">YAYASAN</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="yayasan.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapYYS.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="user.html"><img src="person_add_100dp_FFFFFF.png" alt="Logo"> User</button>
+            <button class="menu-btn" data-url="izinYYS.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringYYS.html"><img src="insight1.png" alt="Logo"> Monitoring YYS</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu UPG -->
+      <ul id="menu-upg" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoUPG.png" alt="Logo">UPG</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="upg.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapUPG.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="izinUPG.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringUPG.html"><img src="insight1.png" alt="Logo"> Monitoring UPG</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu DOMSOS -->
+      <ul id="menu-domsos" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoDomsos.png" alt="Logo">DOMSOS</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="domsos.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapDS.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="izinDS.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringDS.html"><img src="insight1.png" alt="Logo"> Monitoring DOMSOS</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu IMUN -->
+      <ul id="menu-imun" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoIMUN.png" alt="Logo">IMUN</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="imun.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapIMUN.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeIMUN.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinIMUN.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringIMUN.html"><img src="insight1.png" alt="Logo"> Monitoring IMUN</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu UNBS -->
+      <ul id="menu-unbs" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoulun.png" alt="Logo">UNBS</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="unbs.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapUNBS.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeUNBS.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinUNBS.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringUNBS.html"><img src="insight1.png" alt="Logo"> Monitoring UNBS</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu SMA -->
+      <ul id="menu-sma" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoulun.png" alt="Logo">SMA</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="sma.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapSMA.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeSMA.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinSMA.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringSMA.html"><img src="insight1.png" alt="Logo"> Monitoring SMA</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu SMP -->
+      <ul id="menu-smp" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoulun.png" alt="Logo">SMP</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="smp.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapSMP.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeSMP.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinSMP.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringSMP.html"><img src="insight1.png" alt="Logo"> Monitoring SMP</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu SD -->
+      <ul id="menu-sd" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoulun.png" alt="Logo">SD</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="sd.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapSD.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeSD.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinSD.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringSD.html"><img src="insight1.png" alt="Logo"> Monitoring SD</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menu RA -->
+      <ul id="menu-ra" class="hidden">
+        <li>
+          <button class="accordion"> <img src="logoulun.png" alt="Logo">RA</button>
+          <div class="panel">
+            <button class="menu-btn" data-url="ra.html"><img src="edit_calendar_100dp_FFFFFF.png" alt="Logo"> Jadwal Kehadiran</button>
+            <button class="menu-btn" data-url="rekapRA.html"><img src="library_books_100dp_FFFFFF.png" alt="Logo"> Rekap Absensi</button>
+            <button class="menu-btn" data-url="parttimeRA.html"><img src="pending_actions_100dp_FFFFFF.png" alt="Logo"> Jadwal Part Time</button>
+            <button class="menu-btn" data-url="izinRA.html"><img src="library_add_check_100dp_FFFFFF.png" alt="Logo"> Data Izin</button>
+            <button class="menu-btn" data-url="monitoringRA.html"><img src="insight1.png" alt="Logo"> Monitoring RA</button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="content">
+      <iframe id="webview" src="beranda.html" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwHiSfuikYC6V1ZKvkG_XFANU3rOF9jaSpGAa8NvyBqczqv8ogYzxbwcWqP-dk1dzrqkg/exec"; // ganti dengan URL WebApp GAS
+
+    async function cekSession(){
+      const token = sessionStorage.getItem("token");
+      if(!token){
+        window.location.href = "login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(API_URL + "?token=" + token);
+        const data = await res.json();
+
+        if(!data.valid){
+          logout();
+          return;
+        }
+
+        // sembunyikan semua menu dulu
+        document.querySelectorAll("nav ul").forEach(el => el.style.display = "none");
+
+        // tampilkan sesuai role dari SERVER (bukan dari sessionStorage)
+        switch(data.role){
+          case "yayasan": document.getElementById("menu-yayasan").style.display = "block"; break;
+          case "sd": document.getElementById("menu-sd").style.display = "block"; break;
+          case "smp": document.getElementById("menu-smp").style.display = "block"; break;
+          case "ra": document.getElementById("menu-ra").style.display = "block"; break;
+          case "sma": document.getElementById("menu-sma").style.display = "block"; break;
+          case "upg": document.getElementById("menu-upg").style.display = "block"; break;
+          case "domsos": document.getElementById("menu-domsos").style.display = "block"; break;
+          case "imun": document.getElementById("menu-imun").style.display = "block"; break;
+          case "unbs": document.getElementById("menu-unbs").style.display = "block"; break;
+        }
+
+      } catch (err){
+        console.error(err);
+        logout();
+      }
+    }
+
+    function logout(){
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    }
+
+    function loadPage(url){
+      document.getElementById("webview").src = url;
+    }
+
+    cekSession();
+  </script>
+</body>
+</html>
