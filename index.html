@@ -195,7 +195,9 @@ document.body.classList.add("block");
 
         // tampilkan sesuai role dari SERVER (bukan dari sessionStorage)
         switch(data.role){
-          case "yayasan": document.getElementById("menu-yayasan").style.display = "block"; break;
+          case "yayasan": document.querySelectorAll('[id^="menu-"]').forEach(el => {
+          el.style.display = "block";
+           }); break;
           case "sd": document.getElementById("menu-sd").style.display = "block"; break;
           case "smp": document.getElementById("menu-smp").style.display = "block"; break;
           case "ra": document.getElementById("menu-ra").style.display = "block"; break;
@@ -225,5 +227,6 @@ document.body.classList.add("block");
   </script>
 </body>
 </html>
+
 
 
