@@ -204,18 +204,38 @@ document.body.classList.add("block");
         document.querySelectorAll("nav ul").forEach(el => el.style.display = "none");
 
         // tampilkan sesuai role dari SERVER (bukan dari sessionStorage)
-        switch(data.role){
-          case "yayasan": document.querySelectorAll('[id^="menu-"]').forEach(el => {
-          el.style.display = "block";
-           }); break;
-          case "sd": document.getElementById("menu-sd").style.display = "block"; break;
-          case "smp": document.getElementById("menu-smp").style.display = "block"; break;
-          case "ra": document.getElementById("menu-ra").style.display = "block"; break;
-          case "sma": document.getElementById("menu-sma").style.display = "block"; break;
-          case "upg": document.getElementById("menu-upg").style.display = "block"; break;
-          case "domsos": document.getElementById("menu-domsos").style.display = "block"; break;
-          case "imun": document.getElementById("menu-imun").style.display = "block"; break;
-          case "unbs": document.getElementById("menu-unbs").style.display = "block"; break;
+        switch (data.role) {
+          case "yayasan":
+            document.querySelectorAll('[id^="menu-"]').forEach(el => {
+              el.style.display = "block";
+            });
+            break;
+          case "sd":
+            document.getElementById("menu-sd").style.display = "block";
+            break;
+          case "smp":
+            document.getElementById("menu-smp").style.display = "block";
+            document.getElementById("menu-sma").style.display = "block";
+            break;
+          case "ra":
+            document.getElementById("menu-ra").style.display = "block";
+            break;
+          case "sma":
+            document.getElementById("menu-sma").style.display = "block";
+            document.getElementById("menu-smp").style.display = "block";
+            break;
+          case "upg":
+            document.getElementById("menu-upg").style.display = "block";
+            break;
+          case "domsos":
+            document.getElementById("menu-domsos").style.display = "block";
+            break;
+          case "imun":
+            document.getElementById("menu-imun").style.display = "block";
+            break;
+          case "unbs":
+            document.getElementById("menu-unbs").style.display = "block";
+            break;
         }
 
       } catch (err){
@@ -237,6 +257,7 @@ document.body.classList.add("block");
   </script>
 </body>
 </html>
+
 
 
 
