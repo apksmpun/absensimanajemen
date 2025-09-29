@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            color: #333;
+        }
+        #loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+        #loading span {
+            font-size: 1.5rem;
+            color: #555;
+            margin-right: 10px;
+        }
+        #loading .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        iframe {
+            width: 90%;
+            height: 90%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Daftar Lembur DOMSOS</h1>
+    <div id="loading">
+        <span>Loading...</span>
+        <div class="spinner"></div>
+    </div>
+    
+    <iframe 
+        src="https://script.google.com/macros/s/AKfycbzny5jzUMFkfapYkecQ7_5Mrf-mHvVswwLQJTsiZNWz2peOqAF6tyf4WgCOuvQUXfyZ/exec" 
+        frameborder="0" 
+        allowfullscreen 
+        onload="hideLoading()">
+    </iframe>
+
+    <script>
+        const token = sessionStorage.getItem("token");
+
+  // kalau tidak ada token atau user buka manual file .html
+  if (!token || window.top === window.self) {
+    // artinya file dibuka langsung, bukan dalam iframe index.html
+    window.location.href = "index.html";
+  }
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
