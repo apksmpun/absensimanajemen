@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100">
 
-  <div class="max-w-6xl mx-auto mt-6 p-4 bg-transparant rounded-xl shadow-lg">
+  <div class="max-w-6xl mx-auto mt-6 p-4 bg-transparent rounded-xl shadow-lg">
     
     <!-- Tabs -->
     <div class="flex border-b mb-4">
@@ -18,40 +18,43 @@
       <button id="tab2" class="px-4 py-2 font-semibold text-gray-500 hover:text-blue-500 focus:outline-none">
         Daftar Lembur
       </button>
+      <button id="tab3" class="px-4 py-2 font-semibold text-gray-500 hover:text-blue-500 focus:outline-none">
+        Rekap Lembur
+      </button>
     </div>
 
     <!-- Iframes -->
     <div class="w-full h-[80vh]">
       <iframe id="iframe1" src="https://script.google.com/macros/s/AKfycbzNf6YWCv3WVbaLyuGypJOeXSq2w_lPKq4bt0lYLCiNxQSSGM-avilRlNItF8V9IGmK/exec" class="w-full h-full" frameborder="0"></iframe>
       <iframe id="iframe2" src="https://script.google.com/macros/s/AKfycbxhu4lXQPVU1sIZ_zz_uJZn76dpYCGk_cT852xXbnmA5DFH8H9830AiE4ETfBYC_rHs/exec" class="w-full h-full hidden" frameborder="0"></iframe>
+      <iframe id="iframe3" src="https://script.google.com/macros/s/AKfycbyDYy3zdupTPMLMugtgiFE6sdmdofCfhtJv6P8YcHfZtoXh6OAALvkPihjl3hpk7he7Zw/exec" class="w-full h-full hidden" frameborder="0"></iframe>
     </div>
   </div>
 
   <script>
-    const tab1 = document.getElementById('tab1');
-    const tab2 = document.getElementById('tab2');
-    const iframe1 = document.getElementById('iframe1');
-    const iframe2 = document.getElementById('iframe2');
+    const tabs = [tab1, tab2, tab3];
+    const iframes = [iframe1, iframe2, iframe3];
 
-    tab1.addEventListener('click', () => {
-      iframe1.classList.remove('hidden');
-      iframe2.classList.add('hidden');
+    function activateTab(activeIndex) {
+      iframes.forEach((iframe, i) => {
+        iframe.classList.toggle("hidden", i !== activeIndex);
+      });
 
-      tab1.classList.add('border-b-2', 'border-blue-500', 'text-blue-500');
-      tab2.classList.remove('border-b-2', 'border-blue-500', 'text-blue-500');
-      tab2.classList.add('text-gray-500');
-    });
+      tabs.forEach((tab, i) => {
+        if (i === activeIndex) {
+          tab.classList.add("border-b-2", "border-blue-500", "text-blue-500");
+          tab.classList.remove("text-gray-500");
+        } else {
+          tab.classList.remove("border-b-2", "border-blue-500", "text-blue-500");
+          tab.classList.add("text-gray-500");
+        }
+      });
+    }
 
-    tab2.addEventListener('click', () => {
-      iframe2.classList.remove('hidden');
-      iframe1.classList.add('hidden');
-
-      tab2.classList.add('border-b-2', 'border-blue-500', 'text-blue-500');
-      tab1.classList.remove('border-b-2', 'border-blue-500', 'text-blue-500');
-      tab1.classList.add('text-gray-500');
-    });
+    tab1.addEventListener("click", () => activateTab(0));
+    tab2.addEventListener("click", () => activateTab(1));
+    tab3.addEventListener("click", () => activateTab(2));
   </script>
 
 </body>
 </html>
-
