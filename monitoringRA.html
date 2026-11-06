@@ -88,25 +88,6 @@
             document.getElementById('loading').style.display = 'none';
         }
 
-        const iframeAbsensi = document.getElementById("iframeAbsensi");
-
-window.addEventListener("message", function(event) {
-
-  // Pastikan pesan berasal dari iframe yang benar
-  if (event.source !== iframeAbsensi.contentWindow) return;
-
-  if (event.data && event.data.type === "GET_ROLE") {
-
-    const role = sessionStorage.getItem("role") || "";
-
-    iframeAbsensi.contentWindow.postMessage({
-      type: "ROLE_RESPONSE",
-      role: role
-    }, event.origin);
-
-  }
-
-});
-    </script>
+       </script>
 </body>
 </html>
